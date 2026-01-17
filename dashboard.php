@@ -34,9 +34,17 @@ $username = $_SESSION['username'];
 
 <div class="sidebar">
     <h2>Metropolitano</h2>
-    <p>Συνδεδεμένος ως : <br><strong><?php echo $username; ?></strong></p>
+
+    <div class="user-info">
+        <p>Συνδεδεμένος ως <?php echo ($role == '1') ? "Φοιτητής :" : "Καθηγητής :"; ?><br>
+            <b><span><?php echo htmlspecialchars($username); ?></span></b>
+        </p>
+    </div>
+
     <ul>
-        <li><a href="dashboard.php">Αρχική</a></li>
+        <li>
+            <a href="dashboard.php">Αρχική</a>
+        </li>
 
         <?php if($role == '1'): ?>
             <li><a href="view_courses.php">Τα Μαθήματά μου</a></li>

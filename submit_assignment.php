@@ -11,13 +11,16 @@ $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
 try {
+    // sql για να μην εμφανιζονται υποβολες που εχουν κατατεθει
     $sql = "SELECT a.assignment_id, a.title as assignment_title, c.title as course_title 
             FROM assignments a
             JOIN courses c ON a.course_id = c.course_id
+            LEFT JOIN submissions s ON a.assignment_id = s.assignment_id AND s.student_id = ?
+            WHERE s.submission_id IS NULL
             ORDER BY c.title ASC";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([$user_id]);
     $available_assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Σφάλμα συστήματος: " . $e->getMessage());
@@ -148,7 +151,17 @@ try {
             .then(data => {
                 if (data.status === 'success') {
                     responseDiv.innerHTML = `<p style='color: #4bb543; font-weight: bold;'>${data.message}</p>`;
-                    form.reset();
+
+                    // --- ΝΕΟΣ ΚΩΔΙΚΑΣ: Αφαίρεση της επιλεγμένης εργασίας από τη λίστα ---
+                    const selectElement = form.querySelector('select[name="assignment_id"]');
+                    const selectedValue = selectElement.value;
+                    const optionToRemove = selectElement.querySelector(`option[value="${selectedValue}"]`);
+
+                    if (optionToRemove) {
+                        optionToRemove.remove(); // Αφαιρεί την επιλογή από το DOM
+                    }
+
+                    form.reset(); // Καθαρίζει τα υπόλοιπα πεδία (π.χ. το αρχείο)
                 } else {
                     responseDiv.innerHTML = `<p style='color: #ffcc00; font-weight: bold;'>${data.message}</p>`;
                 }

@@ -2,34 +2,27 @@
 include('includes/config.php');
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
     header("Location: login.php");
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
-$role = $_SESSION['role_id'];
 $username = $_SESSION['username'] ;
 $assignments = [];
 
 try {
-    if ($role == 1) {
-        // SQL ΓΙΑ ΦΟΙΤΗΤΗ
+        // SQL: Εμφάνιση εργασιών
         $sql = "SELECT a.assignment_id, a.title, a.description, a.deadline, c.title AS course_name 
                 FROM assignments a
                 JOIN courses c ON a.course_id = c.course_id
                 JOIN student_courses sc ON c.course_id = sc.course_id
                 JOIN students s ON sc.student_id = s.student_id
-                WHERE s.user_id = ?
+                LEFT JOIN submissions sub ON (a.assignment_id = sub.assignment_id AND s.student_id = sub.student_id)
+                WHERE s.user_id = ? AND sub.submission_id IS NULL
                 ORDER BY a.deadline ASC";
-    } else {
-        // SQL ΓΙΑ ΚΑΘΗΓΗΤΗ
-        $sql = "SELECT a.assignment_id, a.title, a.description, a.deadline, c.title AS course_name 
-                FROM assignments a
-                JOIN courses c ON a.course_id = c.course_id
-                WHERE c.teacher_id = ?
-                ORDER BY a.deadline ASC";
-    }
+
+
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$user_id]);
@@ -95,8 +88,8 @@ try {
 </div>
 
 <div class="main-content">
-    <h1><?php echo ($role == 1) ? "Οι Εργασίες μου" : "Διαχείριση Εργασιών"; ?></h1>
-    <p>Δείτε τις εργασίες με τις προθεσμίες τους ανα μάθημα.</p>
+    <h1>Οι Εργασίες μου</h1>
+    <p>Δείτε τις εργασίες με τις προθεσμίες τους.</p>
 
     <div class="assignment-list">
 
@@ -111,11 +104,7 @@ try {
                     </div>
 
                     <div class="actions">
-                        <?php if ($role == 1): ?>
                             <a href="submit_assignment.php?id=<?php echo $task['assignment_id']; ?>" class="btn-action">Υποβολή</a>
-                        <?php else: ?>
-                            <a href="view_assignment.php?id=<?php echo $task['assignment_id']; ?>" class="btn-action">Προβολή Υποβολών</a>
-                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
