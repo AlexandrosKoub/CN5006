@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 $teacher_id = $_SESSION['user_id'];
 $message = "";
 
-
+/* sql query to get all the courses where the teacher is assigned */
 if (isset($_GET['delete_id'])) {
     $id_to_delete = $_GET['delete_id'];
     try {
@@ -33,6 +33,7 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="el">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Διαχείριση Μαθημάτων | Metropolitano</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -44,18 +45,10 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             flex-direction: row;
         }
 
-        .sidebar {
-            box-sizing: border-box;
-            flex-shrink: 0;
-        }
+
 
         /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            box-sizing: border-box;
-            max-width: 100%;
-        }
+
         .header-actions {
             display: flex;
             justify-content: space-between;
@@ -92,38 +85,14 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-        /* Mobile Styles (768px and down) */
+        /* responsiveness */
         @media (max-width: 768px) {
             body { flex-direction: column; }
 
             .sidebar {
                 width: 100%;
-                height: auto;
-                padding: 20px 15px;
-                text-align: center;
-
+                height: 50%;
             }
-
-            .sidebar h2 { font-size: 1.3rem; margin-bottom: 5px; }
-            .sidebar p { font-size: 0.85rem; margin-bottom: 15px; color: #bbb; }
-
-            .sidebar ul {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 8px;
-                padding: 0;
-            }
-
-            .sidebar ul li { width: auto; margin: 0; }
-
-            .sidebar ul li a {
-                background: #444; /* Makes links look like buttons */
-                padding: 8px 12px;
-                border-radius: 4px;
-                font-size: 0.85rem;
-            }
-
             .main-content { padding: 25px 15px; }
 
             .header-actions {
@@ -144,6 +113,9 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 min-height: 40px;
                 display: flex;
                 align-items: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+
             }
             td:last-child { border-bottom: 0; }
 
@@ -162,7 +134,7 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="sidebar">
     <h2>Metropolitano</h2>
-    <p>Συνδεδεμένος ως Καθηγητής : <br><strong><?php echo $_SESSION['username']; ?></strong></p>
+    <p>Συνδεδεμένος ως Καθηγητής :<br><strong><?php echo $_SESSION['username']; ?></strong></p>
     <ul>
         <li><a href="dashboard.php">Αρχική</a></li>
         <li><a href="manage_courses.php">Διαχείριση Μαθημάτων</a></li>
@@ -201,10 +173,12 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php echo htmlspecialchars(substr($course['description'], 0, 60)) . '...'; ?>
                         </td>
                         <td data-label="Ενέργειες" class="action-cell">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                             <a href="edit_course.php?id=<?php echo $course['course_id']; ?>" class="btn btn-edit">Επεξεργασία</a>
                             <a href="manage_courses.php?delete_id=<?php echo $course['course_id']; ?>"
                                class="btn btn-delete"
                                onclick="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μάθημα;');">Διαγραφή</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 $teacher_id = $_SESSION['user_id'];
 $assignment_filter = isset($_GET['id']) ? $_GET['id'] : null;
 $message = "";
-
+/*post method for the grade and update if already one */
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_grade'])) {
     $sub_id = $_POST['submission_id'];
     $new_grade = $_POST['grade'];
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_grade'])) {
         $message = "<div class='alert success'>Ο βαθμός ενημερώθηκε επιτυχώς!</div>";
     }
 }
-
+/* sql query to show only submissions without grade and latest submission*/
 try {
     $query = "SELECT s.submission_id, s.file_path, s.submission_date, s.grade, 
                  u.id AS student_id, u.username AS student_name, 
@@ -32,7 +32,7 @@ try {
           JOIN assignments a ON s.assignment_id = a.assignment_id
           JOIN courses c ON a.course_id = c.course_id
           WHERE c.teacher_id = ?
-          AND s.grade IS NULL  /* <--- Add this line */
+          AND s.grade IS NULL  
           AND s.submission_id = (
               SELECT MAX(s2.submission_id)
               FROM submissions s2
@@ -59,16 +59,16 @@ try {
 <html lang="el">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Προβολή Εργασιών | Metropolitano</title>
     <link rel="stylesheet" href="style.css">
     <style>
-
         body {
             display: flex;
             background: #f4f4f4;
             margin: 0;
         }
-
+        /* table with the data adjustments */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -102,6 +102,7 @@ try {
             padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
+            width: 100%;
         }
 
         .alert {
@@ -113,6 +114,42 @@ try {
         .success {
             background: #d4edda;
             color: #155724;
+        }
+        /* responsiveness*/
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
+
+            /* table adjustment for responsiveness*/
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background: #fff;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50% !important; /* using important to seperate the items as nothing else worked*/
+                text-align: right !important;
+            }
+            td:last-child { border-bottom: 0; }
+            /* Add labels so that you can still see them at table */
+            td:before {
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+                color: #820202;
+            }
         }
     </style>
 </head>
@@ -130,9 +167,8 @@ try {
         <li><a href="logout.php">Αποσύνδεση</a></li>
     </ul>
 </div>
-
 <div class="main-content">
-    <h1>Προβολή Υποβολών</h1>
+    <h1 style="text-align: center">Προβολή Υποβολών</h1>
     <?= $message ?>
 
     <table class="data-table">
@@ -150,17 +186,17 @@ try {
         <?php if (count($submissions) > 0): ?>
             <?php foreach ($submissions as $row): ?>
                 <tr>
-                    <td><strong><?= htmlspecialchars($row['student_name']) ?></strong></td>
-                    <td><?= htmlspecialchars($row['assignment_title']) ?></td>
-                    <td><?= date("d/m/Y H:i", strtotime($row['submission_date'])) ?></td>
-                    <td><a href="<?= $row['file_path'] ?>" target="_blank">Άνοιγμα Αρχείου</a></td>
+                    <td data-label="Φοιτητής"><strong><?= htmlspecialchars($row['student_name']) ?></strong></td>
+                    <td data-label="Εργασία"><?= htmlspecialchars($row['assignment_title']) ?></td>
+                    <td data-label="Ημερομηνία"><?= date("d/m/Y H:i", strtotime($row['submission_date'])) ?></td>
+                    <td data-label="Αρχείο"><a href="<?= $row['file_path'] ?>" target="_blank">Άνοιγμα Αρχείου</a></td>
                     <form method="POST">
-                        <td>
+                        <td data-label="Βαθμός">
                             <input type="hidden" name="submission_id" value="<?= $row['submission_id'] ?>">
                             <input type="number" name="grade" step="0.1" min="0" max="10"
                                    value="<?= $row['grade'] ?>" class="grade-input">
                         </td>
-                        <td>
+                        <td data-label="Ενέργειες">
                             <button type="submit" name="update_grade" class="btn-update">Αποθήκευση</button>
                         </td>
                     </form>
@@ -184,36 +220,7 @@ try {
     <p style="margin-top: 20px;"><b>Copyright &copy; 2026 <br> "Metropolitano Κολλέγιο"</b></p>
 </footer>
 <script>
-    fetch(window.location.href, {
-        method: 'POST',
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        body: formData
-    })
-        .then(response => {
-            if(response.ok) {
-                // 1. Give visual feedback
-                statusMsg.innerHTML = '✅ Βαθμολογήθηκε!';
-                row.style.backgroundColor = '#e8f5e9';
-
-                // 2. Fade out and remove the row
-                setTimeout(() => {
-                    row.style.transition = 'all 0.5s ease';
-                    row.style.opacity = '0';
-                    row.style.transform = 'translateX(20px)';
-
-                    setTimeout(() => {
-                        row.remove(); // Removes the row from the table completely
-
-                        // Optional: Show message if table is now empty
-                        const tbody = document.getElementById('submissionsTable');
-                        if (tbody.querySelectorAll('tr').length === 0) {
-                            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">🎉 Όλα τα μαθήματα βαθμολογήθηκαν!</td></tr>';
-                        }
-                    }, 500);
-                }, 1000);
-            }
-        })
-    }
+    // log out confirmation
     const logoutBtn = document.querySelector('a[href="logout.php"]');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
@@ -222,6 +229,7 @@ try {
             }
         });
     }
+
 </script>
 </body>
 </html>

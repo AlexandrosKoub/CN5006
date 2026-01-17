@@ -57,6 +57,35 @@ try {
         .fail { background: #f8d7da; color: #721c24; }
 
         .date-text { font-size: 0.8rem; color: #888; }
+        @media (max-width: 768px) {
+            body { display: flex; flex-direction: column;}
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
+            table, thead, tbody, th, td, tr { display: block; }
+
+            /* Hide the header labels (but keep for accessibility) */
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+
+            tr {
+                background: #fff; border: 1px solid #eee; border-radius: 12px;
+                margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                padding: 10px;
+            }
+
+            td {
+                border: none; border-bottom: 1px solid #f9f9f9; position: relative;
+                padding-left: 50% !important; text-align: right !important;
+                min-height: 40px; display: flex; align-items: center; justify-content: flex-end;
+            }
+
+            td:last-child { border-bottom: none; }
+
+            /* Use data-label to insert headings on the left of each row */
+            td:before {
+                content: attr(data-label);
+                position: absolute; left: 15px; width: 45%; padding-right: 10px;
+                white-space: nowrap; text-align: left; font-weight: bold; color: #820202;
+            }
+        }
     </style>
 </head>
 <body>
@@ -97,15 +126,15 @@ try {
                 <tbody>
                 <?php foreach ($course_grades as $row): ?>
                     <tr>
-                        <td><strong><?php echo htmlspecialchars($row['title']); ?></strong></td>
-                        <td><code><?php echo htmlspecialchars($row['description']); ?></code></td>
-                        <td><?php echo htmlspecialchars($row['exam_period']); ?></td>
-                        <td>
+                        <td data-label="Μάθημα"><strong><?php echo htmlspecialchars($row['title']); ?></strong></td>
+                        <td data-label="Περιγραφή"><code><?php echo htmlspecialchars($row['description']); ?></code></td>
+                        <td data-label="Εξεταστική"><?php echo htmlspecialchars($row['exam_period']); ?></td>
+                        <td data-label="Βαθμός">
                             <span class="grade-badge <?php echo ($row['grade'] >= 5) ? 'pass' : 'fail'; ?>">
                                 <?php echo number_format($row['grade'], 2); ?>
                             </span>
                         </td>
-                        <td class="date-text">
+                        <td data-label="Ημερομηνία" class="date-text">
                             <?php echo date("d M Y", strtotime($row['updated_at'])); ?>
                         </td>
                     </tr>

@@ -89,7 +89,28 @@ if ($selected_course) {
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { width: 100%; height: 50%; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
+
+            /* Transform Table for responsiveness */
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            tr {
+                border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px;
+                background: #fff; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            }
+            td {
+                border: none; border-bottom: 1px solid #eee; position: relative;
+                padding-left: 50% ; text-align: right ;
+                min-height: 45px; display: flex; align-items: center; justify-content: flex-end;
+            }
+            td:last-child { border-bottom: 0; }
+            /* Add labels so that you can still see them at table */
+            td:before {
+                content: attr(data-label);
+                position: absolute; left: 10px; width: 45%; padding-right: 10px;
+                white-space: nowrap; text-align: left; font-weight: bold; color: #820202;
+            }
+            .grade-input { width: 100% ; }
         }
     </style>
 </head>
@@ -140,17 +161,17 @@ if ($selected_course) {
                     <tbody>
                     <?php foreach ($students_enrolled as $student): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($student['username']); ?></td>
+                            <td data-label="Φοιτητής"><?php echo htmlspecialchars($student['username']); ?></td>
                             <form method="POST">
                                 <input type="hidden" name="student_id" value="<?php echo $student['student_id']; ?>">
                                 <input type="hidden" name="course_id" value="<?php echo $selected_course; ?>">
-                                <td>
+                                <td data-label="Εξεταστική">
                                     <input type="text" name="exam_period" value="<?php echo $student['exam_period'] ?? 'January 2026'; ?>" class="grade-input" style="width: 120px;">
                                 </td>
-                                <td>
+                                <td data-label="Βαθμός (0-10)">
                                     <input type="number" name="grade_val" step="0.1" min="0" max="10" value="<?php echo $student['grade']; ?>" class="grade-input">
                                 </td>
-                                <td>
+                                <td data-label="Ενέργεια">
                                     <button type="submit" name="submit_grade" class="btn-save">Αποθήκευση</button>
                                 </td>
                             </form>

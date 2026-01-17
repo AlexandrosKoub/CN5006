@@ -44,6 +44,7 @@ try {
 <html lang="el">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Εργασίες | Metropolitano</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -72,6 +73,8 @@ try {
         .btn-action:hover { background: #9c0b0b; }
 
         @media (max-width: 768px) {
+            body { display: flex; flex-direction: column;}
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
             .assignment-card { flex-direction: column; align-items: flex-start; gap: 15px; }
         }
     </style>
