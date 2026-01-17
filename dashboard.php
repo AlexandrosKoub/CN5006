@@ -22,8 +22,11 @@ $username = $_SESSION['username'];
     <link rel="stylesheet" href="style.css">
     <style>
         body { display: flex; margin: 0; background: #f4f4f4; }
-
-
+        /*responsiveness*/
+        @media (max-width: 850px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
+        }
 
     </style>
 </head>
@@ -95,7 +98,8 @@ $username = $_SESSION['username'];
         let greeting = "";
 
         if (hour < 12) greeting = "Καλημέρα";
-        else if (hour < 20) greeting = "Καλησπέρα";
+        else if (12> hour < 17) greeting = "Καλό μεσημέρι";
+        else if (hour<20) greeting = "Καλό Απόγευμα";
         else greeting = "Καλό Βράδυ";
 
         const currentText = welcomeHeader.innerText;
