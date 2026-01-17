@@ -125,7 +125,7 @@ if (isset($_SESSION['user_id'])) {
         <ul>
             <li><a href="main_page.php">Αρχική</a></li>
             <li><a href="login.php">Σύνδεση</a></li>
-            <li><a href="includes/register.php">Εγγραφή</a></li>
+            <li><a href="register.php">Εγγραφή</a></li>
         </ul>
     </nav>
 </header>
@@ -148,7 +148,7 @@ if (isset($_SESSION['user_id'])) {
 
             <button type="submit" class="btn-submit">Είσοδος</button>
         </form>
-        <p class="login-link">Δεν έχετε λογαριασμό; <a href="includes/register.php">Εγγραφείτε εδώ</a></p>
+        <p class="login-link">Δεν έχετε λογαριασμό; <a href="register.php">Εγγραφείτε εδώ</a></p>
     </div>
 </main>
 

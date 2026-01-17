@@ -103,7 +103,7 @@
         <ul>
             <li><a href="main_page.php">Αρχική</a></li>
             <li><a href="login.php">Σύνδεση</a></li>
-            <li><a href="includes/register.php">Εγγραφή</a></li>
+            <li><a href="register.php">Εγγραφή</a></li>
         </ul>
     </nav>
 </header>
@@ -142,7 +142,7 @@
         <ul>
             <li><a href="https://www.mitropolitiko.edu.gr/contact/visit/#visit-form" class="slide-5">Visit Form</a>
             </li>
-            <li><a href="includes/register.php" class="slide-6">Register Form</a>
+            <li><a href="register.php" class="slide-6">Register Form</a>
             </li>
             <li><a href="https://www.mitropolitiko.edu.gr/contact/#contact-form" class="slide-7">Contact Form</a>
             </li>

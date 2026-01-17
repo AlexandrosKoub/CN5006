@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require 'config.php';
+require 'includes/config.php';
 
 $response = ["status" => "error", "message" => "Κάτι πήγε στραβά."];
 

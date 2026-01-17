@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require 'includes/config.php';
 
 if (isset($_SESSION['user_id'])) {
     header("Location: ../dashboard.php");
@@ -17,7 +17,7 @@ $message = "";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Εγγραφή | Metropolitano</title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
         .container {
@@ -83,10 +83,7 @@ $message = "";
             font-weight: 600;
         }
 
-        /*had to be included here as images is different folder*/
-        footer {
-            background-image: url("/images/1.jpg")}
-        }
+
 
         /* Responsive */
         @media (max-width: 480px) {
@@ -120,8 +117,8 @@ $message = "";
     </div>
     <nav>
         <ul>
-            <li><a href="../main_page.php">Αρχική</a></li>
-            <li><a href="../login.php">Σύνδεση</a></li>
+            <li><a href="main_page.php">Αρχική</a></li>
+            <li><a href="login.php">Σύνδεση</a></li>
             <li><a href="register.php">Εγγραφή</a></li>
         </ul>
     </nav>
@@ -163,7 +160,7 @@ $message = "";
         <button type="submit" class="btn-submit">Δημιουργία Λογαριασμού</button>
     </form>
 
-    <p class="login-link">Έχετε ήδη λογαριασμό; <a href="../login.php">Συνδεθείτε</a></p>
+    <p class="login-link">Έχετε ήδη λογαριασμό; <a href="login.php">Συνδεθείτε</a></p>
 </div>
 
 <footer class="footer-content">
@@ -194,7 +191,7 @@ $message = "";
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    responseDiv.innerHTML = `<p style='color:green; padding:10px; border:1px solid green;'>${data.message} <a href='/login.php'>Συνδεθείτε εδώ.</a></p>`;
+                    responseDiv.innerHTML = `<p style='color:green; padding:10px; border:1px solid green;'>${data.message} <a href='../login.php'>Συνδεθείτε εδώ.</a></p>`;
                     this.reset(); // Clear the form
                 } else {
                     responseDiv.innerHTML = `<p style='color:red; padding:10px; border:1px solid red;'>${data.message}</p>`;
