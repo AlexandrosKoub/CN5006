@@ -105,10 +105,18 @@ $username = $_SESSION['username'];
         const hour = new Date().getHours();
         let greeting = "";
 
-        if (hour < 12) greeting = "Καλημέρα";
-        else if (12> hour < 17) greeting = "Καλό μεσημέρι";
-        else if (hour<20) greeting = "Καλό Απόγευμα";
-        else greeting = "Καλό Βράδυ";
+        if (hour < 12) {
+            greeting = "Καλημέρα";
+        }
+        else if (hour >= 12 && hour < 17) {
+            greeting = "Καλό μεσημέρι";
+        }
+        else if (hour >= 17 && hour < 20) {
+            greeting = "Καλό Απόγευμα";
+        }
+        else {
+            greeting = "Καλό Βράδυ";
+        }
 
         const currentText = welcomeHeader.innerText;
         const name = currentText.split(',')[1];
