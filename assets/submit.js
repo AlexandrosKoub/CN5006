@@ -1,56 +1,50 @@
-const form = document.getElementById('uploadForm');
-    const btn = document.getElementById('submitBtn');
-    const spinner = document.getElementById('spinner');
+document.addEventListener('DOMContentLoaded', () => {
+    const uploadForm = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
     const responseDiv = document.getElementById('js-response');
 
-    form.onsubmit = function(e) {
+    uploadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        btn.disabled = true;
-        spinner.style.display = 'block';
-        btnText.innerText = 'Γίνεται ανέβασμα...';
+        submitBtn.disabled = true;
+        btnText.innerText = "Παρακαλώ περιμένετε...";
+        spinner.style.display = "block";
         responseDiv.innerHTML = "";
 
-        const formData = new FormData(this);
+        const formData = new FormData(uploadForm);
 
-        fetch('CN5006/api_submit_assignment.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    responseDiv.innerHTML = `<p style='color: #4bb543; font-weight: bold;'>${data.message}</p>`;
-
-                    // --- ΝΕΟΣ ΚΩΔΙΚΑΣ: Αφαίρεση της επιλεγμένης εργασίας από τη λίστα ---
-                    const selectElement = form.querySelector('select[name="assignment_id"]');
-                    const selectedValue = selectElement.value;
-                    const optionToRemove = selectElement.querySelector(`option[value="${selectedValue}"]`);
-
-                    if (optionToRemove) {
-                        optionToRemove.remove(); // Αφαιρεί την επιλογή από το DOM
-                    }
-
-                    form.reset(); // Καθαρίζει τα υπόλοιπα πεδία (π.χ. το αρχείο)
-                } else {
-                    responseDiv.innerHTML = `<p style='color: #ffcc00; font-weight: bold;'>${data.message}</p>`;
-                }
-            })
-            .catch(error => {
-                responseDiv.innerHTML = `<p style='color: red; font-weight: bold;'>Σφάλμα επικοινωνίας με τον διακομιστή.</p>`;
-            })
-            .finally(() => {
-                btn.disabled = false;
-                spinner.style.display = 'none';
-                btnText.innerText = 'Υποβολή Εργασίας';
+        try {
+            const response = await fetch('../api_submit_assignment.php', {
+                method: 'POST',
+                body: formData
             });
-    };
-    const logoutBtn = document.querySelector('a[href="logout.php"]');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
-            if (!confirm("Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;")) {
-                e.preventDefault();
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                responseDiv.innerHTML = `
+                    <div style="padding:15px; background:#d4edda; color:#155724; border-radius:8px; margin-bottom:20px;">
+                        ${result.message}
+                    </div>`;
+                uploadForm.reset(); // Clear the form
+
+                setTimeout(() => { window.location.reload(); }, 2000);
+
+            } else {
+                throw new Error(result.message || "Σφάλμα κατά την υποβολή.");
             }
-        });
-    }
+
+        } catch (error) {
+            responseDiv.innerHTML = `
+                <div style="padding:15px; background:#f8d7da; color:#721c24; border-radius:8px; margin-bottom:20px;">
+                    Σφάλμα: ${error.message}
+                </div>`;
+        } finally {
+            submitBtn.disabled = false;
+            btnText.innerText = "Υποβολή Εργασίας";
+            spinner.style.display = "none";
+        }
+    });
+});
