@@ -126,7 +126,7 @@ try {
     </div>
     <p style="margin-top: 20px;"><b>Copyright &copy; 2026 <br> "Metropolitano Κολλέγιο"</b></p>
 </footer>
-<script>
+<script >
     const form = document.getElementById('uploadForm');
     const btn = document.getElementById('submitBtn');
     const spinner = document.getElementById('spinner');
@@ -175,8 +175,8 @@ try {
                 btnText.innerText = 'Υποβολή Εργασίας';
             });
     };
-        const logoutBtn = document.querySelector('a[href="logout.php"]');
-        if (logoutBtn) {
+    const logoutBtn = document.querySelector('a[href="logout.php"]');
+    if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
             if (!confirm("Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;")) {
                 e.preventDefault();
@@ -184,6 +184,8 @@ try {
         });
     }
 </script>
+<script src="assets/main.js"></script>
+<script src="assets/submit.js"></script>
 
 </body>
 </html>

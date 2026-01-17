@@ -115,15 +115,6 @@ $username = $_SESSION['username'];
         welcomeHeader.innerText = greeting + "," + name;
     });
 
-    const logoutBtn = document.querySelector('a[href="logout.php"]');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
-            if (!confirm("Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;")) {
-                e.preventDefault();
-            }
-        });
-    }
-
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
@@ -135,5 +126,6 @@ $username = $_SESSION['username'];
         });
     });
 </script>
+<script src="assets/main.js"></script>
 </body>
 </html>

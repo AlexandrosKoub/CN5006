@@ -3,7 +3,7 @@ session_start();
 require 'includes/config.php';
 
 if (isset($_SESSION['user_id'])) {
-    header("Location: ../dashboard.php");
+    header("Location: dashboard.php");
     exit();
 }
 
@@ -172,39 +172,7 @@ $message = "";
     </div>
     <p style="margin-top: 20px;"><b>Copyright &copy; 2026 <br> "Metropolitano Κολλέγιο"</b></p>
 </footer>
-<script>
-    document.getElementById('registerForm').onsubmit = function(e) {
-        e.preventDefault();
-
-        const btn = this.querySelector('.btn-submit');
-        const responseDiv = document.getElementById('message-box'); // Add a div for messages
-
-        btn.disabled = true;
-        btn.innerText = 'Γίνεται επεξεργασία...';
-
-        const formData = new FormData(this);
-
-        fetch('api_register.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    responseDiv.innerHTML = `<p style='color:green; padding:10px; border:1px solid green;'>${data.message} <a href='../login.php'>Συνδεθείτε εδώ.</a></p>`;
-                    this.reset(); // Clear the form
-                } else {
-                    responseDiv.innerHTML = `<p style='color:red; padding:10px; border:1px solid red;'>${data.message}</p>`;
-                }
-            })
-            .catch(error => {
-                responseDiv.innerHTML = `<p style='color:red;'>Σφάλμα επικοινωνίας με τον διακομιστή.</p>`;
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btn.innerText = 'Δημιουργία Λογαριασμού';
-            });
-    };
-</script>
+<script src="assets/main.js"></script>
+<script src="assets/register.js"></script>
 </body>
 </html>

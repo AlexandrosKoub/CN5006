@@ -154,34 +154,8 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-    var map = L.map('map', {
-        scrollWheelZoom: false,
-        dragging: !L.Browser.mobile,
-        tap: !L.Browser.mobile
-    }).setView([40.63436, 22.93929], 16);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    var marker = L.marker([40.63436, 22.93929]).addTo(map);
-    marker.bindPopup("<b>Metropolitano Campus Thessaloniki</b><br>Welcome!").openPopup();
-    window.addEventListener('resize', function() {
-        setTimeout(function() {
-            map.invalidateSize();
-        }, 400);
-    });
-
-    /* potential back fix*/
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            window.location.reload(true);
-        }
-    });
-</script>
-
+<script src="assets/map.js"></script>
+<script src="assets/main.js"></script>
 <div class="video-container">
     <video autoplay muted loop playsinline poster="images/video-placeholder.jpg">
     <source src="images/vid.mp4" type="video/mp4">
@@ -204,6 +178,6 @@
     </div>
     <p style="margin-top: 20px;"><b>Copyright &copy; 2026 <br> "Metropolitano Κολλέγιο"</b></p>
 </footer>
-
+<script src="assets/main.js"></script>
 </body>
 </html>

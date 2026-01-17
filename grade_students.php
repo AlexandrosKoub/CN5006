@@ -195,15 +195,6 @@ if ($selected_course) {
     </div>
     <p style="margin-top: 20px;"><b>Copyright &copy; 2026 <br> "Metropolitano Κολλέγιο"</b></p>
 </footer>
-<script>
-const logoutBtn = document.querySelector('a[href="logout.php"]');
-if (logoutBtn) {
-logoutBtn.addEventListener('click', function(e) {
-if (!confirm("Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;")) {
-e.preventDefault();
-}
-});
-}
-</script>
+<script src="assets/main.js"></script>
 </body>
 </html>
