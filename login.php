@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
             background: #ffffff;
             width: 100%;
             max-width: 400px;
-            padding: 30px;
+            padding: 60px 60px 60px 40px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
@@ -55,8 +55,8 @@ if (isset($_SESSION['user_id'])) {
 
         input {
             width: 100%;
-            padding: 12px ;
-            border: 1px solid ;
+            padding: 14px ;
+            border: 1px solid #eee;
             border-radius: 10px;
             font-size: 1rem;
             background-color: #f8f9fa;
@@ -69,8 +69,8 @@ if (isset($_SESSION['user_id'])) {
         }
         .btn-submit {
             width: 100%;
-            background: #8e8b8c;
-            color: #f6f2f2;
+            background: #820202;
+            color: #ffffff;
             padding: 14px;
             border: none;
             border-radius: 10px;
@@ -81,7 +81,7 @@ if (isset($_SESSION['user_id'])) {
             margin-top: 10px;
         }
         .btn-submit:hover {
-            background: #9c0b0b;
+            background: #5a0101;
             transform: translateY(-1px);
         }
         .login-link {
@@ -96,15 +96,21 @@ if (isset($_SESSION['user_id'])) {
             text-decoration: none;
             font-weight: 600;
         }
-
-        @media (max-width: 400px) {
+        @media (min-width:321px and max-width: 425px) {
+            .container {
+                width: 130px;
+                padding: 20px 30px 20px 20px;
+            }
+        }
+        @media (max-width: 320px) {
             .navbar {
                 flex-direction: column;
                 padding: 15px;
                 text-align: center;
             }
             .container {
-                padding: 20px;
+                width: 90%;
+                padding: 20px 40px 20px 20px;
             }
             nav ul {
                 margin-top: 10px;

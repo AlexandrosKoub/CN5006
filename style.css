@@ -37,7 +37,7 @@ nav ul li a {
 }
 nav a { text-decoration: none; color: white; font-size: 18px; margin: 0 15px; }
 
-/*responsive*/
+/*responsive for main_page,register,login*/
 @media (max-width: 900px) {
     .content-wrapper {
         flex-direction: column;
