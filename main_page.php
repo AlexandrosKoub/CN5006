@@ -117,8 +117,10 @@
 
 <div class="content-wrapper">
     <div class="text-column">
-        <h3>Why Choose Us</h3>
-        <p>Discover what makes Us stand out from the rest and what makes this College the best!</p>
+        <h3 style="text-align: center">Why Choose Us</h3>
+        <p>Discover what makes Us stand out from the rest and what makes this College the best! <br>
+        Below you can find links for all of our partners,study programmes and facilities! <br>
+        If that is not enough you can see our forms just on the right !</p>
         <ul>
             <li><a href="https://www.mitropolitiko.edu.gr/college/universities/" class="slide-1">1. International Universities</a>
             </li>
@@ -134,10 +136,11 @@
     <div id="map"></div>
 
         <div class="text-column">
-        <h3>Enrolment</h3>
+        <h3 style="text-align: center">Enrolment</h3>
             <p>
                 Please find below all the different ways that you can reach us! Let us help you shape your future together!
-                And if want you can even come see us in person if you follow the <b>map!</b>
+                And if want you can even come see us in person if you follow the <b>map!</b> <br>
+                Otherwise fill up our forms below!
             </p>
         <ul>
             <li><a href="https://www.mitropolitiko.edu.gr/contact/visit/#visit-form" class="slide-5">Visit Form</a>
