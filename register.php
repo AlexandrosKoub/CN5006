@@ -1,6 +1,7 @@
 <?php
-session_start();
 require 'includes/config.php';
+session_start();
+
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");

@@ -9,7 +9,7 @@ document.getElementById('registerForm').onsubmit = function(e) {
 
         const formData = new FormData(this);
 
-        fetch('CN5006/api_register.php', {
+        fetch('../project/api_register.php', {
             method: 'POST',
             body: formData
         })
