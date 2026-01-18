@@ -105,8 +105,7 @@ if (isset($_SESSION['user_id'])) {
         @media (max-width: 320px) {
             .navbar {
                 flex-direction: column;
-                padding: 15px;
-                text-align: center;
+
             }
             .container {
                 width: 90%;

@@ -140,7 +140,7 @@
             <p>
                 Please find below all the different ways that you can reach us! Let us help you shape your future together!
                 And if want you can even come see us in person if you follow the <b>map!</b> <br>
-                Otherwise fill up our forms below!
+                Otherwise, fill up our forms below!
             </p>
         <ul>
             <li><a href="https://www.mitropolitiko.edu.gr/contact/visit/#visit-form" class="slide-5">Visit Form</a>

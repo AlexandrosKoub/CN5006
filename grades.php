@@ -62,24 +62,20 @@ try {
             .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; height: 50%; }
             table, thead, tbody, th, td, tr { display: block; }
 
-            /* Hide the header labels (but keep for accessibility) */
             thead tr { position: absolute; top: -9999px; left: -9999px; }
-
             tr {
                 background: #fff; border: 1px solid #eee; border-radius: 12px;
                 margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
                 padding: 10px;
             }
-
             td {
                 border: none; border-bottom: 1px solid #f9f9f9; position: relative;
                 padding-left: 50% !important; text-align: right !important;
                 min-height: 40px; display: flex; align-items: center; justify-content: flex-end;
             }
-
             td:last-child { border-bottom: none; }
 
-            /* Use data-label to insert headings on the left of each row */
+            /* Use data-label to insert headings */
             td:before {
                 content: attr(data-label);
                 position: absolute; left: 15px; width: 45%; padding-right: 10px;
