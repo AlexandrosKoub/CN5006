@@ -115,6 +115,12 @@ try {
             background: #d4edda;
             color: #155724;
         }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px; }
         /* responsiveness*/
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -168,8 +174,11 @@ try {
     </ul>
 </div>
 <div class="main-content">
-    <h1 style="text-align: center">Προβολή Υποβολών</h1>
-    <?= $message ?>
+    <div class="header-section" >
+        <h1 style="margin: 0;">Προβολή Υποβολών</h1>
+        <div class="current-date">Η σημερινή ημερομηνία είναι: <?php echo date("d/m/Y"); ?></div>
+    </div>
+
 
     <table class="data-table">
         <thead>

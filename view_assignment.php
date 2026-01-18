@@ -44,7 +44,7 @@ try {
 
         body { display: flex; min-height: 100vh; margin: 0; background: #f4f7f6; }
 
-        /* Assignment Cards */
+        /* assignment */
         .assignment-list { display: grid; gap: 20px; margin-top: 20px; }
         .assignment-card {
             background: white; border-radius: 12px; padding: 20px;
@@ -88,8 +88,13 @@ try {
 </div>
 
 <div class="main-content">
-    <h1>Οι Εργασίες μου</h1>
-    <p>Δείτε τις εργασίες με τις προθεσμίες τους.</p>
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <h1>Οι Εργασίες μου</h1>
+        <div class="current-date">Η σημερινή ημερομηνία είναι : <?php echo date("d/m/Y"); ?></div>
+    </div>
+    <p style="margin-top: -10px;">Δείτε τις εργασίες με τις προθεσμίες τους.</p>
+
+
 
     <div class="assignment-list">
 

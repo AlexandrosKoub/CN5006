@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
         <div id="message-box"></div>
         <h2>Σύνδεση Χρήστη</h2>
 
-        <form id="loginForm">
+        <form id="loginForm" autocomplete="off">
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="example@mail.com" required>

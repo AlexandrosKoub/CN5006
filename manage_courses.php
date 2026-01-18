@@ -49,10 +49,10 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         /* Main Content */
 
-        .header-actions {
+        .header-section {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 30px;
             gap: 20px;
         }
@@ -71,7 +71,7 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         /* Buttons */
         .btn { padding: 10px 18px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; transition: 0.3s; display: inline-block; cursor: pointer; border: none; }
-        .btn-add { background: #820202; color: white; white-space: nowrap; }
+        .btn-add { background: #820202; color: white; white-space: nowrap;}
         .btn-edit { background: #ffc107; color: #000; margin-bottom: 5px; }
         .btn-delete { background: #dc3545; color: white; }
         .action-cell { white-space: nowrap; }
@@ -95,7 +95,7 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
             .main-content { padding: 25px 15px; }
 
-            .header-actions {
+            .header-section {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 15px;
@@ -146,10 +146,16 @@ $my_courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="main-content">
-    <div class="header-actions">
-        <h1>Διαχείριση Μαθημάτων</h1>
-        <a href="add_course.php" class="btn btn-add">+ Νέο Μάθημα</a>
+    <div class="header-section">
+        <h1 style="margin: 0;">Διαχείριση Μαθημάτων</h1>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+            <div class="current-date">
+                Η σημερινή ημερομηνία είναι:<?php echo date("d/m/Y"); ?>
+            </div>
+            <a href="add_course.php" class="btn btn-add" style="text-decoration: none;">+ Νέο Μάθημα</a>
+        </div>
     </div>
+
 
     <?php echo $message; ?>
 

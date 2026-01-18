@@ -1,0 +1,30 @@
+{  
+    "emmet.includeLanguages": {
+        "php": "html"
+    },
+
+    "editor.formatOnSave": true, 
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+
+    
+    "javascript.suggest.autoImports": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    
+    "files.autoSave": "afterDelay", 
+    "files.autoSaveDelay": 1000,
+    "files.associations": {
+        "*.php": "php"
+    },
+
+    
+    "editor.fontSize": 14,
+    "editor.lineHeight": 22,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active"
+
+
+}

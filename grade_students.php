@@ -132,6 +132,10 @@ if ($selected_course) {
 <div class="main-wrapper">
     <div class="main-content">
         <h1>Βαθμολόγηση Φοιτητών</h1>
+        <div class="current-date">
+            Η σημερινή ημερομηνία είναι:<?php echo date("d/m/Y"); ?>
+        </div>
+
 
         <?php echo $message; ?>
 
@@ -185,6 +189,7 @@ if ($selected_course) {
         </div>
     </div>
 </div>
+
 
 <footer class="footer-content">
     <div class="social-links">

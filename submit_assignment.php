@@ -82,6 +82,11 @@ try {
 
 <div class="main-wrapper">
     <div class="main-content">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <h1>Κατάθεση Εργασιών</h1>
+            <div class="current-date">Η σημερινή ημερομηνία είναι : <?php echo date("d/m/Y"); ?></div>
+        </div>
+
         <div class="submission-card">
             <h2 style="margin-top:0;">Κατάθεση Εργασίας</h2>
             <p style="color: #666;">Ανεβάστε το αρχείο σας με το κωδικό του μαθήματος στο όνομα. (πχ. CN5005.ΑριθμοςΜητρωου.pdf)</p>

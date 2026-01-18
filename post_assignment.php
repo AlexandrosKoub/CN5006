@@ -147,6 +147,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="header-text">
             <h1>Ανάρτηση Εργασίας</h1>
             <p>Παρακαλώ εισάγετε πληροφορίες για την εργασία.</p>
+            <div class="current-date">
+                Η σημερινή ημερομηνία είναι:<?php echo date("d/m/Y"); ?>
+            </div>
         </div>
 
         <?php echo $message; ?>

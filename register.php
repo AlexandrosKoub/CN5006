@@ -127,7 +127,7 @@ $message = "";
 <div class="container">
     <div id="message-box"></div><h2>Φόρμα Εγγραφής</h2>
 
-    <form id="registerForm" method="POST">
+    <form id="registerForm" method="POST" autocomplete="off">
         <div class="form-group">
             <label>Όνομα Χρήστη (Username)</label>
             <input type="text" name="username" placeholder="Academic Username" required>

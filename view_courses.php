@@ -104,8 +104,10 @@ try {
 
 <div class="main-wrapper">
     <div class="main-content">
-        <h1>Τα Μαθήματά μου</h1>
-        <p>Εδώ μπορείτε να δείτε το πρόγραμμα σπουδών σας και το υλικό των μαθημάτων.</p>
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <h1>Τα Μαθήματά μου</h1>
+            <div class="current-date">Η σημερινή ημερομηνία είναι : <?php echo date("d/m/Y"); ?></div>
+        </div>
 
         <div class="course-grid">
             <?php if (count($courses) > 0): ?>
